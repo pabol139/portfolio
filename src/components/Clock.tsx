@@ -4,12 +4,19 @@ export default function Clock() {
   const innerRadius = 90;
   const outerRadius = 95;
   const center = 108;
+  let secondsDeg = 0;
+  let minutesDeg = 0;
+  let hoursDeg = 0;
 
   const hours = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
-  const [nowTs, setNowTs] = useState(() => Date.now());
+  const [nowTs, setNowTs] = useState(() => 0);
+  const [mounted, setMounted] = useState(false);
   const rafRef = useRef<number | null>(null);
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    setMounted(true);
     function tick() {
       setNowTs(Date.now());
       rafRef.current = requestAnimationFrame(tick);
@@ -19,29 +26,31 @@ export default function Clock() {
 
     return () => {
       if (rafRef.current != null) {
-        clearInterval(rafRef.current);
+        cancelAnimationFrame(rafRef.current);
       }
     };
   }, []);
 
-  const now = new Date(nowTs);
-  const ms = now.getMilliseconds();
-  const sRaw = now.getSeconds() + ms / 1000;
-  const quantizedSeconds = Math.floor(sRaw / 5) * 5;
-  const mRaw = now.getMinutes() + quantizedSeconds / 60;
+  if (nowTs !== 0) {
+    const now = new Date(nowTs);
+    const ms = now.getMilliseconds();
+    const sRaw = now.getSeconds() + ms / 1000;
+    const quantizedSeconds = Math.floor(sRaw / 5) * 5;
+    const mRaw = now.getMinutes() + quantizedSeconds / 60;
 
-  const quantizedMinutes = Math.floor(mRaw / 1) * 1;
+    const quantizedMinutes = Math.floor(mRaw / 1) * 1;
 
-  const hRaw = (now.getHours() % 12) + quantizedMinutes / 60;
+    const hRaw = (now.getHours() % 12) + quantizedMinutes / 60;
 
-  const secondsDeg = sRaw * 6; // 360/60
+    secondsDeg = sRaw * 6; // 360/60
 
-  const minutesDeg = mRaw * 6; // 360/60
-  const hoursDeg = hRaw * 30; // 360/12
-
+    minutesDeg = mRaw * 6; // 360/60
+    hoursDeg = hRaw * 30; // 360/12}
+  }
   return (
     <svg
-      className="bg-black  h-full flex-1 !shrink-0 min-w-[55%]"
+      data-mounted={mounted}
+      className="bg-black  opacity-0 blur-sm scale-95 h-full flex-1 !shrink-0 min-w-[55%] transition-[opacity,filter,transform] data-[mounted=true]:opacity-100 data-[mounted=true]:blur-0 data-[mounted=true]:scale-100 duration-500"
       viewBox="0 0 216 216"
     >
       {/* Dots */}
@@ -49,10 +58,10 @@ export default function Clock() {
         const angle = (i * 6 * Math.PI) / 180;
         const isHourMark = i % 5 === 0;
 
-        const x1 = center + Math.cos(angle) * innerRadius;
-        const y1 = center + Math.sin(angle) * innerRadius;
-        const x2 = center + Math.cos(angle) * outerRadius;
-        const y2 = center + Math.sin(angle) * outerRadius;
+        const x1 = (center + Math.cos(angle) * innerRadius).toFixed(5);
+        const y1 = (center + Math.sin(angle) * innerRadius).toFixed(5);
+        const x2 = (center + Math.cos(angle) * outerRadius).toFixed(5);
+        const y2 = (center + Math.sin(angle) * outerRadius).toFixed(5);
         return (
           <line
             key={i}
@@ -70,8 +79,8 @@ export default function Clock() {
       {hours.map((h, i) => {
         const deg = i * 30 - 90;
         const angle = (deg * Math.PI) / 180;
-        const x = center + Math.cos(angle) * 70;
-        const y = center + Math.sin(angle) * 70;
+        const x = (center + Math.cos(angle) * 70).toFixed(5);
+        const y = (center + Math.sin(angle) * 70).toFixed(5);
 
         return (
           <text
@@ -155,7 +164,7 @@ export default function Clock() {
       </g>
 
       <circle cx={center} cy={center} r={4} fill="orange"></circle>
-      <circle cx={center} cy={center} r={2} fill="232422"></circle>
+      <circle cx={center} cy={center} r={2} fill="#232422"></circle>
     </svg>
   );
 }

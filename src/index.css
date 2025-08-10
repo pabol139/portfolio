@@ -1,0 +1,96 @@
+:root {
+  --background: #fafafa;
+  --foreground: #262526;
+  --gray100: #838383;
+  --gray200: #646464;
+  --accent: #00a5f7;
+  --secondary-cap-gradient: linear-gradient(
+    90deg,
+    #ff603c 0%,
+    #fd7252 10%,
+    #fd7252 100%
+  );
+  --secondary-gradient: conic-gradient(
+    from 90deg,
+    #d6330e 0%,
+    #d6330e 12%,
+    #bf2400 14%,
+    #bf2400 25%,
+    #bf2400 35%,
+    #fd7252 39%,
+    #fd7252 61%,
+    #ed4e29 63%,
+    #ed4e29 87%,
+    #d6330e 89%,
+    #d6330e 100%
+  );
+  --secondary-inner-cap-shadow: 0 0px 1px 0 rgb(255 255 255 / 0.8),
+    inset 0 0px 2px 0 rgb(255 147 122 / 0.25);
+  --gray-cap-gradient: linear-gradient(
+    90deg,
+    #b5b5b5 0%,
+    #c5c5c5 10%,
+    #c5c5c5 100%
+  );
+  --gray-gradient: conic-gradient(
+    from 90deg,
+    #a0a0a0 0%,
+    #a0a0a0 12%,
+    #8e8e8e 14%,
+    #8e8e8e 25%,
+    #8e8e8e 35%,
+    #b0b0b0 39%,
+    #b0b0b0 61%,
+    #c6c6c6 63%,
+    #c6c6c6 87%,
+    #a0a0a0 89%,
+    #a0a0a0 100%
+  );
+  --gray-inner-cap-shadow: 0 0px 1px 0 rgb(255 255 255 / 1);
+  --page-width: 728px;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+@font-face {
+  font-family: "Geist";
+  font-weight: 400;
+  src: local("Geist"), url("/src/fonts/Geist-Regular.woff2") format("woff2"),
+    url("/src/fonts/Geist-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Geist";
+  font-weight: 500;
+  src: local("Geist"), url("/src/fonts/Geist-Medium.woff2") format("woff2"),
+    url("/src/fonts/Geist-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Geist";
+  font-weight: 600;
+  src: local("Geist"), url("/src/fonts/Geist-SemiBold.woff2") format("woff2"),
+    url("/src/fonts/Geist-SemiBold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Geist";
+  font-weight: 700;
+  src: local("Geist"), url("/src/fonts/Geist-Bold.woff2") format("woff2"),
+    url("/src/fonts/Geist-Bold.woff") format("woff");
+}
+
+@keyframes new-ping {
+  75%,
+  to {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
