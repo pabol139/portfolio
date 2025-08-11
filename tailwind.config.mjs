@@ -7,6 +7,7 @@ export default {
         foreground: "var(--foreground)",
         gray100: "var(--gray100)",
         gray200: "var(--gray200)",
+        gray300: "var(--gray300)",
         accent: "var(--accent)",
       },
       backgroundImage: {
