@@ -1,34 +1,51 @@
-<div class="space-y-8">
-    <div class="grid grid-cols-[105px_10px_1fr] gap-6 items-baseline justify-between">
-    <span class=" text-gray100 text-sm">2022 &nbsp;- &nbsp;Present</span>
-    <div class="shrink-0 mt-2 relative">
-        <div class="relative size-[10px]">
-            <div class="size-[10px] bg-accent rounded-full"></div>
-            <div class="[animation:new-ping_3s_cubic-bezier(0,0,0.2,1)_infinite] opacity-25  absolute  bg-accent inline-flex -inset-[0.125rem] rounded-full"></div>
+<div
+style={{
+    '--date-width':'105px',
+    '--dot-width':'8px',
+    '--info-width':'1fr',
+    '--desktop-gap':'1.5rem',
+    '--mobile-gap':'1rem',
+    '--spacing':'2rem',
+    '--spacing-dot-line':'0.5rem'
+}}
+
+class="relative">
+      <div class="w-[1px] h-[calc(100%_-_0.25rem)] bg-gray100 absolute top-1 !mt-0 !mb-0 left-[calc(var(--dot-width)_/_2_-_0.5px)]  md:left-[calc(var(--date-width)_+_var(--desktop-gap)_+_var(--dot-width)_/_2_-_0.5px)] z-10">
         </div>
-        <div class="w-[1px] h-[107px] bg-accent absolute right-0 left-0 mx-auto mt-1.5">
+        <div class="relative space-y-[var(--spacing)]  z-20">
+ <div class="grid relative grid-cols-[10px_1fr] md:grid-cols-[var(--date-width)_var(--dot-width)_var(--info-width)] gap-[var(--mobile-gap)] md:gap-[var(--desktop-gap)] items-baseline justify-between">
+    <span class="hidden md:inline-block text-gray100 text-sm">2022 &nbsp;- &nbsp;Present</span>
+    <div class="shrink-0 mt-2 relative">
+        <div class="relative size-[var(--dot-width)] after:content-[''] after:h-[var(--spacing-dot-line)]  after:w-[var(--spacing-dot-line)] after:-z-10 after:left-0 after:right-0 after:mx-auto after:bg-background after:block after:absolute before:content-[''] before:h-[var(--spacing-dot-line)]  before:w-[var(--spacing-dot-line)] before:-z-10 before:left-0 before:right-0 before:mx-auto before:-top-[var(--spacing-dot-line)] before:bg-background before:block before:absolute">
+            <div class="size-[var(--dot-width)] bg-accent outline outline-accent outline-offset-1 rounded-full"></div>
+            <div class="[animation:new-ping_3s_cubic-bezier(0,0,0.2,1)_infinite] opacity-25  absolute  bg-accent inline-flex -inset-[0.25rem] rounded-full"></div>
         </div>
     </div>
-    <div class="flex-1 space-y-1.5">
+     <div class="w-[1px] -z-20 h-[calc(100%_+_var(--spacing)_+_4px)] top-1 bg-accent absolute left-[calc(var(--dot-width)_/_2_-_0.5px)]  md:left-[calc(var(--date-width)_+_var(--desktop-gap)_+_var(--dot-width)_/_2_-_0.5px)]">
+    </div>
+    <div class="flex-1 space-y-1.5 min-w-0">
         <h3 class="text-foreground"><a href="https://www.hawkersco.com/" class="hover:underline underline-offset-2 decoration-gray100">Hawkers</a><span class="text-gray100"><span class="mx-3">·</span>Front End Developer</span></h3>
+        <p class="md:hidden text-gray100 text-sm !mt-0">2022 &nbsp;- &nbsp;Present</p>
         <p class="text-sm">Build, style and maintain the design system. Reduce load times and the amount of data sent to the browser by 30%. Design and build internal platforms.</p>
-        <p class="text-sm text-gray100">Technologies: &nbsp;&nbsp;Javascript<span class="mx-2">·</span>Typescript<span class="mx-2">·</span>React<span class="mx-2">·</span>NextJS<span class="mx-2">·</span>Sass</p>
+        <p class="text-sm text-gray100">Technologies: &nbsp;Javascript <span class="mx-1">·</span> Typescript <span class="mx-1">·</span> React <span class="mx-1">·</span> NextJS <span class="mx-1">·</span> Sass </p>
     </div>
 </div>
-<div class="grid grid-cols-[105px_10px_1fr] gap-6 items-baseline justify-between">
-    <span class=" text-gray100 text-sm">2021 &nbsp;- &nbsp;2022</span>
+<div class="grid grid-cols-[10px_1fr] md:grid-cols-[var(--date-width)_var(--dot-width)_var(--info-width)] gap-[var(--mobile-gap)] md:gap-[var(--desktop-gap)] items-baseline justify-between">
+    <span class="hidden md:inline-block text-gray100 text-sm">2021 &nbsp;- &nbsp;2022</span>
     <div class="shrink-0 mt-2 relative">
-        <div class="relative size-[10px]">
-            <div class="size-[10px] border border-gray100 rounded-full"></div>
+        <div class="relative size-[var(--dot-width)] after:content-[''] after:h-[var(--spacing-dot-line)]  after:w-[var(--spacing-dot-line)] after:-z-10 after:left-0 after:right-0 after:mx-auto after:bg-background after:block after:absolute before:content-[''] before:h-[var(--spacing-dot-line)]  before:w-[var(--spacing-dot-line)] before:-z-10 before:left-0 before:right-0 before:mx-auto before:-top-[var(--spacing-dot-line)] before:bg-background before:block before:absolute">
+            <div class="size-[var(--dot-width)] outline outline-offset-1 outline-gray100 bg-background rounded-full"></div>
         </div>
-        <div class="w-[1px] h-14 bg-gray100 absolute right-0 left-0 mx-auto mt-1.5">
-        </div>
+      
     </div>
-    <div class="flex-1 space-y-1.5">
+    <div class="flex-1 space-y-1.5 min-w-0">
         <h3 class="text-foreground"><a href="https://itcube.it/" class="hover:underline underline-offset-2 decoration-gray100">IT Cube</a><span class="text-gray100"><span class="mx-3">·</span>Junior Full Stack Developer</span></h3>
+        <p class="md:hidden text-gray100 text-sm !mt-0">2021 &nbsp;- &nbsp;2022</p>
         <p class="text-sm">Design and build applications.</p>
-        <p class="text-sm text-gray100">Technologies: &nbsp;&nbsp;Java<span class="mx-2">·</span>Kotlin<span class="mx-2">·</span>Javascript<span class="mx-2">·</span>Angular</p>
+        <p class="text-sm text-gray100">Technologies: &nbsp;Java <span class="mx-1">·</span> Kotlin <span class="mx-1">·</span> Javascript <span class="mx-1">·</span> Angular </p>
     </div>
 </div>
+        </div>
+   
 
 </div>
