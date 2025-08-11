@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 export default function Clock() {
   const innerRadius = 90;
@@ -10,19 +10,66 @@ export default function Clock() {
 
   const hours = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
-  const [nowTs, setNowTs] = useState(() => 0);
   const [mounted, setMounted] = useState(false);
   const rafRef = useRef<number | null>(null);
+
+  const hoursRef = useRef<SVGGElement | null>(null);
+  const minutesRef = useRef<SVGGElement | null>(null);
+  const secondsRef = useRef<SVGGElement | null>(null);
+
+  let lastTime = 0;
+  const targetFPS = 30;
+  const frameInterval = 1000 / targetFPS;
+
   useEffect(() => {
     if (typeof window === "undefined") return;
 
     setMounted(true);
     function tick() {
-      setNowTs(Date.now());
-      rafRef.current = requestAnimationFrame(tick);
+      const now = new Date();
+      const ms = now.getMilliseconds();
+      const sRaw = now.getSeconds() + ms / 1000;
+      const quantizedSeconds = Math.floor(sRaw / 5) * 5;
+      const mRaw = now.getMinutes() + quantizedSeconds / 60;
+
+      const quantizedMinutes = Math.floor(mRaw / 1) * 1;
+
+      const hRaw = (now.getHours() % 12) + quantizedMinutes / 60;
+
+      secondsDeg = sRaw * 6; // 360/60
+
+      minutesDeg = mRaw * 6; // 360/60
+      hoursDeg = hRaw * 30; // 360/12}
+
+      if (secondsRef.current) {
+        secondsRef.current.setAttribute(
+          "transform",
+          `rotate(${secondsDeg}, ${center}, ${center})`
+        );
+      }
+      if (minutesRef.current) {
+        minutesRef.current.setAttribute(
+          "transform",
+          `rotate(${minutesDeg}, ${center}, ${center})`
+        );
+      }
+      if (hoursRef.current) {
+        hoursRef.current.setAttribute(
+          "transform",
+          `rotate(${hoursDeg}, ${center}, ${center})`
+        );
+      }
     }
 
-    rafRef.current = requestAnimationFrame(tick);
+    function loop(now: number) {
+      if (now - lastTime >= frameInterval) {
+        lastTime = now;
+        tick();
+      }
+      requestAnimationFrame(loop);
+    }
+
+    rafRef.current = requestAnimationFrame(loop);
 
     return () => {
       if (rafRef.current != null) {
@@ -31,75 +78,68 @@ export default function Clock() {
     };
   }, []);
 
-  if (nowTs !== 0) {
-    const now = new Date(nowTs);
-    const ms = now.getMilliseconds();
-    const sRaw = now.getSeconds() + ms / 1000;
-    const quantizedSeconds = Math.floor(sRaw / 5) * 5;
-    const mRaw = now.getMinutes() + quantizedSeconds / 60;
+  const ticks = Array.from({ length: 60 }).map((_, i) => {
+    const angle = (i * 6 * Math.PI) / 180;
+    const isHourMark = i % 5 === 0;
 
-    const quantizedMinutes = Math.floor(mRaw / 1) * 1;
+    const x1 = (center + Math.cos(angle) * innerRadius).toFixed(5);
+    const y1 = (center + Math.sin(angle) * innerRadius).toFixed(5);
+    const x2 = (center + Math.cos(angle) * outerRadius).toFixed(5);
+    const y2 = (center + Math.sin(angle) * outerRadius).toFixed(5);
+    return (
+      <line
+        key={i}
+        x1={x1}
+        y1={y1}
+        x2={x2}
+        y2={y2}
+        stroke={isHourMark ? "white" : "#5d5d5d"}
+        strokeWidth={2}
+        strokeLinecap="round"
+      />
+    );
+  });
 
-    const hRaw = (now.getHours() % 12) + quantizedMinutes / 60;
+  const numbers = hours.map((h, i) => {
+    const deg = i * 30 - 90;
+    const angle = (deg * Math.PI) / 180;
+    const x = (center + Math.cos(angle) * 70).toFixed(5);
+    const y = (center + Math.sin(angle) * 70 + 3).toFixed(5); // Add 3 to center it
 
-    secondsDeg = sRaw * 6; // 360/60
+    return (
+      <text
+        key={h}
+        x={x}
+        y={y}
+        textAnchor="middle"
+        dominantBaseline="middle"
+        fontSize={24}
+        fontWeight={500}
+        fill="white"
+      >
+        {h}
+      </text>
+    );
+  });
 
-    minutesDeg = mRaw * 6; // 360/60
-    hoursDeg = hRaw * 30; // 360/12}
-  }
   return (
     <svg
       data-mounted={mounted}
       className="bg-black  opacity-0 blur-sm scale-95 h-full flex-1 !shrink-0 min-w-[55%] transition-[opacity,filter,transform] data-[mounted=true]:opacity-100 data-[mounted=true]:blur-0 data-[mounted=true]:scale-100 duration-500"
       viewBox="0 0 216 216"
     >
-      {/* Dots */}
-      {Array.from({ length: 60 }).map((_, i) => {
-        const angle = (i * 6 * Math.PI) / 180;
-        const isHourMark = i % 5 === 0;
+      {/* Ticks */}
+      {ticks}
 
-        const x1 = (center + Math.cos(angle) * innerRadius).toFixed(5);
-        const y1 = (center + Math.sin(angle) * innerRadius).toFixed(5);
-        const x2 = (center + Math.cos(angle) * outerRadius).toFixed(5);
-        const y2 = (center + Math.sin(angle) * outerRadius).toFixed(5);
-        return (
-          <line
-            key={i}
-            x1={x1}
-            y1={y1}
-            x2={x2}
-            y2={y2}
-            stroke={isHourMark ? "white" : "#5d5d5d"}
-            strokeWidth={2}
-            strokeLinecap="round"
-          />
-        );
-      })}
-
-      {hours.map((h, i) => {
-        const deg = i * 30 - 90;
-        const angle = (deg * Math.PI) / 180;
-        const x = (center + Math.cos(angle) * 70).toFixed(5);
-        const y = (center + Math.sin(angle) * 70).toFixed(5);
-
-        return (
-          <text
-            key={h}
-            x={x}
-            y={y + 2}
-            textAnchor="middle"
-            dominantBaseline="middle"
-            fontSize={24}
-            fontWeight={500}
-            fill="white"
-          >
-            {h}
-          </text>
-        );
-      })}
+      {/* Numbers */}
+      {numbers}
 
       {/* Hours */}
-      <g transform={`rotate(${hoursDeg}, ${center}, ${center})`}>
+      <g
+        ref={hoursRef}
+        className="will-change-transform"
+        transform={`rotate(${hoursDeg}, ${center}, ${center})`}
+      >
         <line
           x1={center}
           y1={center}
@@ -124,7 +164,11 @@ export default function Clock() {
 
       {/* Minutes */}
 
-      <g transform={`rotate(${minutesDeg}, ${center}, ${center})`}>
+      <g
+        ref={minutesRef}
+        className="will-change-transform"
+        transform={`rotate(${minutesDeg}, ${center}, ${center})`}
+      >
         <line
           x1={center}
           y1={center}
@@ -151,7 +195,11 @@ export default function Clock() {
       <circle cx={center} cy={center} r={6} fill="white"></circle>
 
       {/* Seconds line */}
-      <g transform={`rotate(${secondsDeg}, ${center}, ${center})`}>
+      <g
+        ref={secondsRef}
+        className="will-change-transform"
+        transform={`rotate(${secondsDeg}, ${center}, ${center})`}
+      >
         <line
           x1={center + 0 * Math.cos(-90 + (180 * Math.PI) / 180)}
           y1={center + 17 * Math.sin(-90 + (180 * Math.PI) / 180)}
