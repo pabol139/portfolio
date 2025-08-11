@@ -1,1 +1,42 @@
-<h2 class="text-xl text-foreground mb-6">Projects</h2>
+---
+import { File, Spline } from "@lucide/astro";
+---
+
+<section class="text-foreground">
+  <h2 class="text-xl text-foreground">Projects</h2>
+
+  <ul class="mt-5 space-y-4">
+    <li>
+      <a
+        href="
+            "
+        target="_blank"
+        class="hover:bg-gray-200 transition-colors px-2 py-2 -mx-2 rounded-md grid grid-cols-[20px_auto] gap-1.5 items-start"
+      >
+        <Spline size={18} class="mt-1" />
+        <div>
+          <h3>Path Editor</h3>
+          <p class="text-gray100 text-sm">
+            Web editor to modify svg path, using control points and transforms.
+          </p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        href="https://github.com/pabol139/HowTo"
+        target="_blank"
+        class="hover:bg-gray-200 transition-colors px-2 py-2 -mx-2 rounded-md grid grid-cols-[20px_auto] gap-1.5 items-start"
+      >
+        <File size={18} class="mt-1" />
+        <div>
+          <h3>HowTo</h3>
+          <p class="text-gray100 text-sm">
+            Mobile app to help old age individuals to look up for solutions
+            using AI.
+          </p>
+        </div>
+      </a>
+    </li>
+  </ul>
+</section>

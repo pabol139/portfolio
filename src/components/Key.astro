@@ -1,58 +1,54 @@
 ---
-import {Mail, CircleAlert, FileText} from '@lucide/astro'
-import Github from './icons/github.astro';
-import Twitter from './icons/twitter.astro';
+import { Mail, CircleAlert, FileText } from "@lucide/astro";
+import Github from "./icons/github.astro";
+import Twitter from "./icons/twitter.astro";
 
 const type = Astro.props.type;
 const active = Astro.props.active ?? false;
 
-const DEFAULT_STYLE={
-    icon: CircleAlert,
-    number: 99,
-    color: 'white',
-    gradient:'var(--secondary-gradient)',
-    capGradient:'var(--secondary-cap-gradient)',
-    capShadow:'var(--secondary-inner-cap-shadow)'
-}
+const DEFAULT_STYLE = {
+  icon: CircleAlert,
+  number: 99,
+  color: "white",
+  gradient: "var(--secondary-gradient)",
+  capGradient: "var(--secondary-cap-gradient)",
+  capShadow: "var(--secondary-inner-cap-shadow)",
+};
 
 const styles = {
-    'mail':{
-        icon: Mail,
-        number: 1,
-        color: 'white',
-        gradient:'var(--secondary-gradient)',
-        capGradient:'var(--secondary-cap-gradient)',
-        capShadow:'var(--secondary-inner-cap-shadow)'
-
-    },
-    'twitter':{
-        icon: Twitter,
-        number: 2,
-        color: '#474747',
-        gradient:'var(--gray-gradient)',
-        capGradient:'var(--gray-cap-gradient)',
-        capShadow:'var(--gray-inner-cap-shadow)'
-
-    },
-    'github':{
-        icon: Github,
-        number: 3,
-        color: '#474747',
-        gradient:'var(--gray-gradient)',
-        capGradient:'var(--gray-cap-gradient)',
-        capShadow:'var(--gray-inner-cap-shadow)'
-
-    },
-    'cv':{
-        icon: FileText,
-        number: 4,
-        color: '#474747',
-        gradient:'var(--gray-gradient)',
-        capGradient:'var(--gray-cap-gradient)',
-        capShadow:'var(--gray-inner-cap-shadow)'
-
-    },
-}
+  mail: {
+    icon: Mail,
+    number: 1,
+    color: "white",
+    gradient: "var(--secondary-gradient)",
+    capGradient: "var(--secondary-cap-gradient)",
+    capShadow: "var(--secondary-inner-cap-shadow)",
+  },
+  twitter: {
+    icon: Twitter,
+    number: 2,
+    color: "#474747",
+    gradient: "var(--gray-gradient)",
+    capGradient: "var(--gray-cap-gradient)",
+    capShadow: "var(--gray-inner-cap-shadow)",
+  },
+  github: {
+    icon: Github,
+    number: 3,
+    color: "#474747",
+    gradient: "var(--gray-gradient)",
+    capGradient: "var(--gray-cap-gradient)",
+    capShadow: "var(--gray-inner-cap-shadow)",
+  },
+  cv: {
+    icon: FileText,
+    number: 4,
+    color: "#474747",
+    gradient: "var(--gray-gradient)",
+    capGradient: "var(--gray-cap-gradient)",
+    capShadow: "var(--gray-inner-cap-shadow)",
+  },
+};
 
 const info = styles[type as keyof typeof styles] ?? DEFAULT_STYLE;
 const Icon = info.icon;
@@ -61,22 +57,30 @@ const color = info.color;
 const gradient = info.gradient;
 const capGradient = info.capGradient;
 const capShadow = info.capShadow;
-
 ---
 
-
-<div 
-style={{
-    '--number-color': color,
-    '--gradient': gradient,
-    '--capGradient': capGradient,
-    '--capShadow': capShadow,
-}}
-class="bg-foreground p-[1px] w-[60px] h-full rounded-md shadow-innerKey">
-<button data-number={number} data-active={active} class="rounded-[5px] p-2 [background-image:_var(--gradient)] w-full h-full active:scale-[0.98] data-[active=true]:scale-[0.98] transition-transform duration-[50ms]">
-<div class="[background-image:_var(--capGradient)] relative size-[42px] flex items-center justify-center [box-shadow:_var(--capShadow)] shadow-orange-orangeInnerCap rounded-md">
-<span class="absolute top-0.5 right-1 text-[10px] text-[var(--number-color)] opacity-70">{number}</span>
-<Icon size={18} color={color}></Icon>
-</div>
-</button>
+<div
+  style={{
+    "--number-color": color,
+    "--gradient": gradient,
+    "--capGradient": capGradient,
+    "--capShadow": capShadow,
+  }}
+  class="bg-foreground p-[1px] w-[60px] h-full rounded-md shadow-innerKey"
+>
+  <button
+    data-number={number}
+    data-active={active}
+    class="rounded-[5px] p-2 [background-image:_var(--gradient)] w-full h-full active:scale-[0.98] data-[active=true]:scale-[0.98] transition-transform duration-[50ms]"
+  >
+    <div
+      class="[background-image:_var(--capGradient)] relative size-[42px] flex items-c enter justify-center [box-shadow:_var(--capShadow)] shadow-orange-orangeInnerCap rounded-md"
+    >
+      <span
+        class="absolute top-0.5 right-1 text-[10px] text-[var(--number-color)] opacity-70"
+        >{number}</span
+      >
+      <Icon size={18} color={color} />
+    </div>
+  </button>
 </div>

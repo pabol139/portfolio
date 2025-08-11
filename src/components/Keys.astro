@@ -1,45 +1,52 @@
 ---
 import Key from "./Key.astro";
-
-
 ---
 
-
 <script>
-document.addEventListener('keydown', (e) =>{
+  document.addEventListener("keydown", (e) => {
+    if (e.key.toLocaleLowerCase() === "1") {
+      document
+        .querySelector('[data-number="1"]')
+        ?.setAttribute("data-active", "true");
+    }
+    if (e.key.toLocaleLowerCase() === "2") {
+      document
+        .querySelector('[data-number="2"]')
+        ?.setAttribute("data-active", "true");
+    }
+    if (e.key.toLocaleLowerCase() === "3") {
+      document
+        .querySelector('[data-number="3"]')
+        ?.setAttribute("data-active", "true");
+    }
+    if (e.key.toLocaleLowerCase() === "4") {
+      document
+        .querySelector('[data-number="4"]')
+        ?.setAttribute("data-active", "true");
+    }
+  });
 
- if (e.key.toLocaleLowerCase() === "1"){
-  document.querySelector('[data-number="1"]')?.setAttribute('data-active', 'true')
-  }
- if (e.key.toLocaleLowerCase() === "2"){
-    document.querySelector('[data-number="2"]')?.setAttribute('data-active', 'true')
-  }
- if (e.key.toLocaleLowerCase() === "3"){
-    document.querySelector('[data-number="3"]')?.setAttribute('data-active', 'true')
-  
-  }
- if (e.key.toLocaleLowerCase() === "4"){
-    document.querySelector('[data-number="4"]')?.setAttribute('data-active', 'true')
-  }
-})
-
-document.addEventListener('keyup', (e) =>{
-  document.querySelector('[data-number="1"]')?.setAttribute('data-active', 'false')
-  document.querySelector('[data-number="2"]')?.setAttribute('data-active', 'false')
-  document.querySelector('[data-number="3"]')?.setAttribute('data-active', 'false')
-  document.querySelector('[data-number="4"]')?.setAttribute('data-active', 'false')
-})
-
-
+  document.addEventListener("keyup", (e) => {
+    document
+      .querySelector('[data-number="1"]')
+      ?.setAttribute("data-active", "false");
+    document
+      .querySelector('[data-number="2"]')
+      ?.setAttribute("data-active", "false");
+    document
+      .querySelector('[data-number="3"]')
+      ?.setAttribute("data-active", "false");
+    document
+      .querySelector('[data-number="4"]')
+      ?.setAttribute("data-active", "false");
+  });
 </script>
 
-<div class="flex gap-[1px] bg-foreground h-[66px] w-fit p-0.5 rounded-lg shadow-outerKey mt-6">
-  <Key type="mail"></Key>
-  <Key type="twitter"></Key>
-  <Key type="github"></Key>
-  <Key type="cv"></Key>
+<div
+  class="flex gap-[1px] bg-foreground h-[66px] w-fit p-0.5 rounded-lg shadow-outerKey mt-6"
+>
+  <Key type="mail" />
+  <Key type="twitter" />
+  <Key type="github" />
+  <Key type="cv" />
 </div>
-
-
-
-

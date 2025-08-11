@@ -1,26 +1,19 @@
 ---
-import Dock from './Dock.astro';
-import Experience from './Experience.astro';
-import Keys from './Keys.astro';
-import Links from './Links.astro';
-import Projects from './Projects.astro';
+import About from "./About.astro";
+import Experience from "./Experience.astro";
+import Footer from "./Footer.astro";
+import Navbar from "./Navbar.astro";
+import Projects from "./Projects.astro";
 ---
 
+<div class="max-w-page mx-auto p-6 pb-12 w-full">
+  <Navbar />
 
-<main class="max-w-page mx-auto w-full p-6 pt-28 pb-12 space-y-20">
-    <div>
-        <header class="flex gap-14 justify-between items-center">
-            <div>
-                <h1 class="text-3xl text-foreground">Hi, I'm Pablo!</h1>
-                <p class="text-base mt-5 max-w-[340px] text-gray200">
-                  Currently working as a <span class="font-bold">Front End Developer</span>, <i>crafting</i> smooth, accesible experiencies. I enjoy solving UI-level complexity — especially when <span class="font-bold">SVGs</span> and <span class="font-bold">animations</span> are involved.
-                </p>
-            </div>
-            <Dock></Dock>
-        </header>
-        <!-- <Keys></Keys> -->
-        <Links></Links>
-    </div>
-    <Experience></Experience>
-    <Projects></Projects>
-</main>
+  <main class="w-full pt-12 md:pt-20 space-y-16 md:space-y-20">
+    <About />
+    <Experience />
+    <Projects />
+    <Footer />
+  </main>
+</div>
+

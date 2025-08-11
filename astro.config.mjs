@@ -5,7 +5,8 @@ import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
 
 export default defineConfig({
-  // ...
   integrations: [tailwind(), react()],
-  // ...
+  server: {
+    allowedHosts: ["f02013703681.ngrok-free.app"],
+  },
 });

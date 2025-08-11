@@ -1,15 +1,19 @@
 ---
-import Clock from './Clock'
-import Reminder from './Reminders.astro'
+import Clock from "./Clock";
+import Reminder from "./Reminders.astro";
 ---
 
-
-
-<div class="shrink-0 [font-family:_system-ui] w-[340px] h-[172px] bg-transparent p-2 rounded-[19px] select-none ">
-<div class="w-full h-full bg-[#6D6D6D] p-[3px] rounded-[15px] shadow-secondBox">
-<div class="w-full h-full bg-[#0A0A0A] rounded-[12px] overflow-auto flex gap-1">
-<Clock client:load></Clock>
-<Reminder></Reminder>
-</div>
-</div>
+<div
+  class="-ml-[1px] md:ml-0 shrink-0 [font-family:_system-ui] w-full md:w-[340px] h-[172px] bg-transparent md:p-2 rounded-[19px] select-none"
+>
+  <div
+    class="w-full h-full bg-[#6D6D6D] p-[3px] rounded-[15px] shadow-secondBox"
+  >
+    <div
+      class="w-full h-full bg-[#0A0A0A] rounded-[12px] overflow-auto flex gap-1"
+    >
+      <Clock client:load />
+      <Reminder />
+    </div>
+  </div>
 </div>
